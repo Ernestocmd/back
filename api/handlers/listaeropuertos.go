@@ -22,7 +22,7 @@ func ListarAeropuertos(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query(`
 	SELECT
 		Aeropuerto.id,
-		CONCAT(Aeropuerto.nombre, ', ', Ciudad.nombre, ', ', Pais.nombre) as Aeropuerto_Origen
+		CONCAT(Aeropuerto.nombre, ', ', Ciudad.nombre, ', ', Pais.nombre) as nombre
 	FROM
 		Aeropuerto
 	JOIN
@@ -41,7 +41,7 @@ func ListarAeropuertos(w http.ResponseWriter, r *http.Request) {
 	// Itera a través de los resultados y agrega a la slice
 	for rows.Next() {
 		var aeropuerto models.Aeropuertos
-		err := rows.Scan(&aeropuerto.ID, &aeropuerto.Aeropuerto)
+		err := rows.Scan(&aeropuerto.ID, &aeropuerto.Nombre)
 		if err != nil {
 			log.Fatal(err)
 		}
